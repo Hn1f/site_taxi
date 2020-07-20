@@ -1,0 +1,5 @@
+<h3>Félicitation vous vous êtes bien inscrit sur TaxisCholet !</h3>
+
+<p>Bonjour, {{ prenom }} !<br/>
+Votre inscription à bien été prise en compte il ne vous reste plus qu'à confirmez votre adresse mail.<br/>
+<a href="{{ path("confirmation", {'token':token}) }}">Cliquez ici pour valider votre adresse mail</a></p>

@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlAsntkQzHrbKeT0GQkaLSSdWIjIqQeqk&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      (function(exports) {
+        "use strict";
+
+        function initMap() {
+          exports.map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+              lat:47.2667,
+              lng: -0.725, 
+            },
+            zoom: 10
+          });
+
+           var marker = new google.maps.Marker({
+            position:{
+              lat:47.0667,
+              lng: -0.8833, 
+            },
+            map: map,
+            title: 'depart'
+  });
+            var marker = new google.maps.Marker({
+            position:{
+              lat:47.4667,
+              lng: -0.55, 
+            },
+            map: map,
+            title: 'arrive'
+  });
+
+        }
+
+        exports.initMap = initMap;
+      })((this.window = this.window || {}));
+    </script>
+  </head>
+  <body>
+  </div><div id="map"></div>
+  <div class="container" id="paiement">
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Félicitation, vous vous appretez à reservez un trajet du  {{ trajet.adresse1 }} {{ trajet.cp1 }}  pour aller au {{ trajet.adresse2}} {{ trajet.cp2 }} le {{ trajet.hour.date | date('d/m/Y H:i:s') }} <br/>
+                Le prix de la course est éstimée à {{ prix }}€ nous serons ravis de vous amener à destination.</p> <br/>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{ form_start(form, {attr: {id: form.vars.id}}) }}
+               <div class="form-group">
+               <label for="card-element">
+                 Credit or Debit Card
+                </label>
+                 <div id="card-element" class="form-control"></div>
+                 <div id="card-errors" class="help-block" role="alert"></div>
+          </div>
+        </div>
+    {{ form_widget(form.token) }}
+    {{ form_end(form) }}
+           
+        </div>
+        </div>
+        <input type='hidden' id="departP" value={{ depart }}>
+        <input   type='hidden' id="arriveP" value={{ arrive }}>
+        
+  </body>
+</html> 
+{% endblock %}
+
+{% block javascripts %}
+        <script type="text/javascript">
+      var form = document.getElementById('{{ form.vars.id }}');
+      var errors = document.getElementById('card-errors');
+     
+      var stripe = Stripe('{{ stripe_public_key }}');
+      var elements = stripe.elements();
+      var card = elements.create('card');
+     
+      card.mount('#card-element');
+      card.addEventListener('change', function(event) {
+        if (event.error) {
+          errors.textContent = event.error.message;
+          form.classList.add('has-error');
+        } else {
+          errors.textContent = '';
+          form.classList.remove('has-error');
+        }
+      });
+     
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+     
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            errors.textContent = result.error.message;
+            form.classList.add('has-error');
+          } else {
+            document.getElementById('{{ form.children.token.vars.id }}').setAttribute('value', result.token.id);
+            form.submit();
+          }
+        });
+      });
+    </script>
+{% endblock %}

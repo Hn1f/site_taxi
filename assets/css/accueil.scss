@@ -1,0 +1,142 @@
+       
+       $jaune:rgba(254, 212, 48, 0.5);
+       $jauneTaxi: #fed430; 
+       $gris: #d4cece; 
+
+body{
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar{
+    background-color: #0f434e;
+    opacity: 100%;
+}
+
+#logo{
+    width: 30%;
+    height: auto;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+.Accueil{
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    background-position:top;
+}
+
+#resa{
+    position: relative;
+    z-index: 1;
+    background-position: absolute; 
+    padding: 5%; 
+    background: url("../../public/img/cholet2.png") no-repeat scroll top/ 100% auto;
+    margin-bottom: 2%;
+}
+
+
+[class*="col-"], footer {
+    /*background-color:lightgreen;
+    border: 2px solid black;*/
+    border-radius: 6px;
+    line-height: 40px;
+    text-align: center;
+    padding: 0;
+}
+
+
+#cp,#cp2{
+    border-bottom-right-radius : 0;
+    border-top-right-radius : 0;
+}
+
+#adresse, #arrive{
+    border-bottom-left-radius :0;
+    border-top-left-radius : 0;
+}
+
+#form1,#form2{
+    color: white;
+    padding: 2%;
+}
+
+.inscription1{
+    margin: 1%;
+}
+
+.trajet2{
+    display: none;
+}
+
+#commentaire, #connexion, #inscription {
+    background-color: $gris;
+    padding: 2%;
+    overflow: hidden;
+    padding:2%;
+    height: 100%;
+}
+
+.ui-autocomplete{
+    background-color: $jaune ;
+}
+
+.topContact{
+    background-color: $jauneTaxi;
+    font-size: 20px;
+}
+
+.jaune{
+    color:$jauneTaxi; 
+}
+
+#paiement{
+    background-color:$gris;
+    border-radius: 0;
+}
+
+.star{
+    background-color:transparent;
+    border:none; 
+    border-radius: 50%;
+}
+
+.inline{
+    display: inline; 
+}
+
+.dropdown-menu{
+    z-index: 10;
+}
+
+.footer{
+    background-color: #0f434e;
+    border-radius: 0%;
+    margin-top: 2%;
+}
+
+.article>img{
+    width: 200px;
+    height: auto;
+}
+
+
+.articlecard{
+    border: solid $gris 1px; 
+    margin: 2%;
+    padding:2%;
+}
+
+#articlelink{
+    background-color: $gris;
+    padding: 2%;
+    overflow: hidden; 
+    height: 100%;
+    margin-top: 2%;
+}

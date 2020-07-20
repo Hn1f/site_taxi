@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+ <div class="connexionbg">
+    <div class="container" style="bg-secondary">{{ form_start(form) }}
+         <div class="row">
+             <div class="col-md-3"></div>
+            <div class="col-md-6"><h1>Modification de compte !</h1></div>
+        </div>
+         <div class="row">
+                <div class="col-md-3 "></div>
+                <div class="col-md-6" id="inscription">
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.firstname) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.lastName) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.email) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.password) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.birth) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.adresse) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.zipCode) }}</div></div>
+                    <div class="row inscription1"><div class="col-md-12">{{ form_row(form.phone) }}</div></div>
+                    <button class="btn btn-warning btn-lg" id="inscriptionbutton" value="Inscription" type="submit">Inscription</button>
+                    <div class="row inscription1"><div class="col-md-12"><a href='{{ path('supprimerUser') }}'>Supprimer mon compte</a></div></div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

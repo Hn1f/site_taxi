@@ -1,12 +1,83 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+<!DOCTYPE html>   
+<html dir="ltr" lang="fr-FR">
+  <head> 
+    <meta charset="UTF-8">
+    <title>{% block title %} Accueil {% endblock %} </title>
+    <link href="https://bootswatch.com/4/journal/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+      <nav class="navbar navbar-expand-lg navbar-dark" id="marge">
+        <a class="navbar-brand" href="#"><img src='img/logo.png' alt='logo' id='logo'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+        data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true"
+        aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse show" id="navbarColor01">
+          <ul class="navbar-nav mr-auto" id="menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('accueil') }}"><i class="icon-home"></i> Accueil<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('contact') }}"><i class="icon-comments-alt"></i> Nous Contacter<span class="sr-only">(current)</span></a>
+            </li>
+            {% if not app.user %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}"><i class="icon-user"></i> Connexion</a>
+              </li>
+            {% else %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> Mon compte</a>
+                <div class="dropdown-menu">
+                  <a class="nav-link text-dark" href="{{ path('mon_compte') }}">Profil</a>
+                  <a class="nav-link text-dark" href="{{ path('mesTrajets') }}">Mes trajets</a>
+                  <a class="nav-link text-dark" href="{{ path('app_logout') }}">Deconnexion</a>
+                </div>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('blog') }}"><i class="icon-th"></i> Blog<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="routeConnexion" data-route-controller="{{path('app_login')}}"></div>
+      <div class="container-fluid">
+        {% block body %}
+        {% endblock %}
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img src="img/LogoCb.png" style="width:50%" alt="logo carte bleue">
+            </div>
+             <div class="col">
+              <img src="img/espece.png" style="width:25%" alt="logo espece">
+             </div>
+
+             <div class="col">
+              <img src="img/cheque.png" style="width:15%" alt="logo cheque">
+             </div>
+             <div class="col">
+              <a style="color:white" href="">mentions légales</a>
+             </div>
+          </div>
+        </div>
+      </footer>
+
+      
+        {% block javascripts %}
+          {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+       <script src="https://js.stripe.com/v3/"></script>
+
     </body>
-</html>
+<html>

@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+            <div id="resa">{{ form_start(form, {'attr': {'id': 'formresa'}}) }}
+                <div class="row trajet1">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4" id="form1">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                {{ form_widget(form.cp1, {'attr': {'placeholder':"Code postal" }}) }}
+                            </div>
+                            <div class="col-lg-8">
+                                {{ form_widget(form.adresse1, {'attr': {'placeholder':"D'où partez-vous ?"}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                {{ form_widget(form.cp2, {'attr': {'placeholder':"Code postal"}}) }}
+                            </div>
+                            <div class="col-lg-8">
+                                {{ form_widget(form.adresse2, {'attr': {'placeholder':"Où voulez-vous aller ? "}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="row trajet1" >
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-2">
+                    <a class="btn btn-warning btn-block"  id='reservez'>Réservez</a>
+                    </div>
+                    <div class="col-lg-5"></div>
+                </div>
+                <div class="row trajet2">
+                        <div class=" col-sm-12" id="form2">
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4"><label for="form[hour]">Quand voulez-vous partir ?</label></div>
+                                <div class ="col-sm-1">{{ form_widget(form.hour.date.day) }}</div>
+                                <div class="col-sm-1">{{ form_widget(form.hour.date.month) }}</div>
+                                <div class="col-sm-1">{{ form_widget(form.hour.date.year) }}</div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4"><label for="form[hour]">A quel heure ?</label></div>
+                                <div class="col-sm-3">{{ form_widget(form.hour.time)}}</div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                 <div class="col-sm-4"> <label for="form[nbPassager]">Combien de passager serez vous ? </label></div>
+                                <div class="col-sm-1">{{ form_widget(form.nbPassager) }}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">{{ form_widget(form.depart) }}</div>
+                                <div class="col-sm-2">{{ form_widget(form.arrive) }}</div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-2 text-center">
+                                <input id="reservez2" class="btn btn-warning btn-block" value="Réservez" type="submit"/>
+                                </div>
+                            </div>
+                        </div>      
+                </div>
+               {{ form_end(form) }}</div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Reservez votre taxi avec AM taxi</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-4"></div>
+                            <div class="col-sm-1"><i class="icon-calendar icon-4x" style="color:#fed430"></i></div>
+                            <div class="col-sm-7 text-justify"><p style ="font-size:1.5em">Commande immédiate ou réservation en moins de 5 minutes</p></div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-sm-2 col-lg-4"></div>
+                            <div class="col-sm-1"><i class="icon-mobile-phone icon-4x" style="color:#fed430"></i></div>
+                            <div class="col-sm-7 text-justify"><p style ="font-size:1.5em">Paiement sécurisé en ligne par carte bleue</p></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-1"></div>
+                    
+                    <div class="col-sm-6 col-lg-4 slideshow" id="commentaire">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Avis Clients :</h2>
+                            </div>
+                        </div>
+                        <ul> 
+                            {% for commentaire in commentaires %}
+                                <div class="inline"> 
+                                <div class="row"> <div class="col-sm-12">{{ commentaire.username }} </div></div>
+                                <div class="row"> <div class="col-sm-12">{{ commentaire.commentaire}} </div></div>
+                                </div>
+                            {% endfor %}   
+                        </ul> 
+                    </div>
+                     <div class="col-sm-1"> </div>
+                </div>
+
+{% endblock %}
+
+

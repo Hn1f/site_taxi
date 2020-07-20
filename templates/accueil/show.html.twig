@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Blog{% endblock %}
+
+
+
+{% block body %}
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2" id="articlelink">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Articles récents</h2>
+                    </div>
+                </div>
+                {% for article in articles %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                          <a href="{{ path('blog_show', {'id': article.id }) }}">{{ article.title }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6 articlecard">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="jaune">{{ articleshow.title }}</h3>
+                    </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <img src="{{ asset('uploads/images/' ~ articleshow.image_name) }}" alt="illustration">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <p>Publié le {{ articleshow.date | date('d/m/Y')}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <p>{{ articleshow.paragraphe | nl2br | raw }}</p>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

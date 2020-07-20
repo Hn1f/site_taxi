@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+        <div class="row topContact">
+        <div class="col-sm-1"></div>
+            <div class="col-sm-11 text-left"> 
+                <h3>Contact</h3>
+            </div>
+        </div>
+        <div class="row topContact">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 text-left"> 
+                <p>Pour toute question, renseignement ou demande de devis pour des trajets non réservable sur le site internet n'hésitez pas a nous contacter</p>
+            </div> 
+        </div>   
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8 text-left"> 
+                    <p>Appeler nous au <span class="jaune"> 06 95 00 98 89 </span>, si vous souhaitez être rappelé merci d'utiliser le formulaire de contact ci-dessous <i class="icon-arrow-down icon-2x" style="color:#fed430"></i></p>
+                </div> 
+            </div> 
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-4 text-left"> 
+                    {{ form_row(form.Nom)}}
+                </div> 
+                <div class="col-lg-1"></div>
+                <div class="col-lg-4 text-left"> 
+                    {{ form_row(form.Email)}}
+                </div> 
+            </div> 
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-4 text-left">
+                    {{ form_row(form.phone)}}
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-9 text-left">
+                    {{ form_row(form.message)}}
+                </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8"></div>
+                <div class="col-lg-2 text-left">
+                    {{ form_row(form.contactbutton)}}
+                </div> 
+            </div>
+        
+        {{ form_end(form) }}
+    </div>
+    
+
+{% endblock %}

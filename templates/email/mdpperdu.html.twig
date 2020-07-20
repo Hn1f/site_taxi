@@ -1,0 +1,5 @@
+<h3>Vous avez perdu votre mot de passe !</h3>
+
+<p>Bonjour, {{ prenom }} !<br/>
+Vous avez demandé une réinitialisation de mot de passe, sinon veuillez ignorer ce message.<br/>
+<a href="{{ path("mdpchange", {'token':token}) }}">Cliquez ici pour le modifier</a></p>

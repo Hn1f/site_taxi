@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Article {% endblock %}
+
+{% block body %}
+    <div class="row topContact">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 text-left"> 
+                <p>Pour crée un arcticle merci de remplir le fomulaire ci-dessous.</p>
+            </div> 
+        </div> 
+        {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 text-left"> 
+                    {{ form_row(form.image) }}
+                </div> 
+            </div>
+             <div class="form-row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4 text-left"> 
+                      {{ form_row(form.title) }} 
+                </div> 
+            </div> 
+            <div class="form-row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-6 text-left"> 
+                      {{ form_row(form.paragraphe) }}
+                </div> 
+            </div> 
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn btn-warning">Publier</button>
+                </div> 
+            </div>
+        
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
