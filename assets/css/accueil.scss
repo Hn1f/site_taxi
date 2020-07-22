@@ -75,12 +75,19 @@ a {
     display: none;
 }
 
-#commentaire, #connexion, #inscription {
+ #connexion, #inscription {
     background-color: $gris;
     padding: 2%;
     overflow: hidden;
-    padding:2%;
     height: 100%;
+    width: 20%;
+}
+
+#commentaire{
+    background-color: $gris;
+    overflow: hidden;
+    height: auto;
+    width: auto;
 }
 
 .ui-autocomplete{
@@ -109,7 +116,10 @@ a {
 
 .inline{
     display:inline-block;
+    position: absolute;
     margin: 6%; 
+    width: 100%;
+    height: 100%;
 }
 
 .dropdown-menu{

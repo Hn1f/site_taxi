@@ -128,14 +128,6 @@ import '../css/connexion.scss';
         }
       });
 
-      $(function(){
-        setInterval(function(){
-           $(".slideshow ul").animate({marginLeft:-3500},800,function(){
-              $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
-           })
-        }, 3500);
-     })
-     ;
      function lancement(){
        'use strict'; 
         $('#etoile1').click(function(){

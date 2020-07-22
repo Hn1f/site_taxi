@@ -98,18 +98,24 @@
                                 <h2>Avis Clients :</h2>
                             </div>
                         </div>
-                        <ul> 
+                         <div id="demo" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
                             {% for commentaire in commentaires %}
-                                <div class="inline"> 
-                                <div class="row"> <div class="col-sm-12">{{ commentaire.username }} </div></div>
-                                <div class="row"> <div class="col-sm-12">{{ commentaire.commentaire}} </div></div>
-                                </div>
-                            {% endfor %}   
-                        </ul> 
+                            {% if commentaire == commentaires[0] %}
+                            <div class="carousel-item active">
+                                <div class="row"> <div class="col-sm-3"></div><div class="col-sm-3 text-left">{{ commentaire.username }} </div></div>
+                                <div class="row"> <div class="col-sm-4"></div><div class="col-sm-8 text-left">{{ commentaire.commentaire}} </div></div>
+                            </div>
+                            {% else %}
+                            <div class="carousel-item">
+                                <div class="row"> <div class="col-sm-3"></div><div class="col-sm-3 text-left">{{ commentaire.username }} </div></div>
+                                <div class="row"> <div class="col-sm-4"></div><div class="col-sm-8 text-left">{{ commentaire.commentaire}} </div></div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                     <div class="col-sm-1"> </div>
-                </div>
-
+            </div>
 {% endblock %}
 
 
