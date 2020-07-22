@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTimeZone;
 use App\Entity\Trajet;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Trajet|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +36,17 @@ class TrajetRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function TrajetenCour($id){
+        $conn = $this->getEntityManager()->getConnection(); 
+        $sql='
+            SELECT * FROM trajet
+            WHERE TIMEDIFF(hour,NOW()) > "01:00" AND hour > NOW() AND user_id= 25 ';
+        $stmt = $conn->prepare($sql); 
+        // $stmt=bind_param("i",$id);
+        $stmt->execute();
+        return $stmt->fetchAll();    
+    }
 
     /*
     public function findOneBySomeField($value): ?Trajet

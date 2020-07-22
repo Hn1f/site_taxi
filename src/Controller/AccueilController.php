@@ -2,28 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use DateTimeZone;
 use Stripe\Stripe; 
 use App\Entity\Trajet;
+use App\Entity\Article;
 use App\Entity\Contact;
 use App\Form\TrajetType;
+use App\Form\ArticleType;
 use App\Form\ContactType;
 use App\Form\PaiementType;
 use App\Entity\Commentaire;
-use App\Form\ArticleType;
 use App\Form\CommentaireType;
+use App\Repository\TrajetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccueilController extends AbstractController
 {
@@ -242,4 +243,20 @@ class AccueilController extends AbstractController
         
         return $this->render('accueil/mentions.html.twig'); 
     }
+
+     /**
+     * @Route("/reservation", name="resa")
+     */
+    public function resa(Request $request,TrajetRepository $repo ){
+
+        $user=$this->getUser();
+        $id = $user->getId();
+        $trajetsencours = $repo->TrajetenCour($id); 
+        dump($trajetsencours); 
+        
+        return $this->render('accueil/trajetscours.html.twig',[
+            'trajetsencours' =>$trajetsencours, 
+        ]); 
+    }
+
 }
