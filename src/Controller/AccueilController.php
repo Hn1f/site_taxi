@@ -234,4 +234,12 @@ class AccueilController extends AbstractController
             'corps' => $corps,  
         ]); 
     }
+
+    /**
+     * @Route("/mentions-légales", name="mention")
+     */
+    public function mention(){
+        
+        return $this->render('accueil/mentions.html.twig'); 
+    }
 }

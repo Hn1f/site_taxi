@@ -63,6 +63,8 @@ class SecurityController extends AbstractController
                 'text/html'
              );
         $mailer->send($message);
+        return $this->render('security/email.html.twig'); 
+
     }
         return $this->render('security/inscription.html.twig', [
         'formInscription' => $form->createView(),
