@@ -11,6 +11,7 @@ use App\Form\TrajetType;
 use App\Form\ArticleType;
 use App\Form\ContactType;
 use App\Form\PaiementType;
+use SMS\SMSPartnerAPI; 
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\TrajetRepository;
@@ -258,5 +259,37 @@ class AccueilController extends AbstractController
             'trajetsencours' =>$trajetsencours, 
         ]); 
     }
+    
+    /**
+     * @Route("/supprimer/{idtrajet}", name="delete")
+     */
+    public function delete($idtrajet){
 
+        $repo = $this->getDoctrine()->getRepository(Trajet::class); 
+        $trajet=$repo->findOneBy(['id'=>$idtrajet]);
+        $depart1= $trajet->getAdresse1()." ". $trajet->getCp1(); 
+        $arrive1= $trajet->getAdresse2()." ". $trajet->getCp2(); 
+        dump($trajet); 
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($trajet);
+        $em->flush();
+        $user = $this->getUser();
+        $nom=$user->getLastname(); 
+        $prenom=$user->getFirstname(); 
+        $smspartner = new SMSPartnerAPI (false);
+        //check credits
+        $result = $smspartner->checkCredits('?apiKey=6c30a24b177c04b53e4160a0ddde0ce091f9d66a');
+        //send SMS
+        $fields = array(
+            "apiKey"=>"6c30a24b177c04b53e4160a0ddde0ce091f9d66a",
+            "phoneNumbers"=>"0769849455",
+            "message"=>"Un trajet de ".$depart1." à ".$arrive1." vien d'être annulé par monsieur ".$nom." ".$prenom.".",
+            "sender" => "AMTaxi",
+        );
+        // $result = $smspartner->sendSms($fields);
+        //get delivery
+        // $result = $smspartner->checkStatusByNumber('?apiKey=6c30a24b177c04b53e4160a0ddde0ce091f9d66a&messageId=666&phoneNumber=0769849455'); 
+        
+        return $this->render('accueil/supptrajet.html.twig'); 
+    }
 }
