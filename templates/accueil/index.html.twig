@@ -10,18 +10,18 @@
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4" id="form1">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 {{ form_widget(form.cp1, {'attr': {'placeholder':"Code postal" }}) }}
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 {{ form_widget(form.adresse1, {'attr': {'placeholder':"D'où partez-vous ?"}}) }}
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 {{ form_widget(form.cp2, {'attr': {'placeholder':"Code postal"}}) }}
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 {{ form_widget(form.adresse2, {'attr': {'placeholder':"Où voulez-vous aller ? "}}) }}
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-2"></div>
-                                <div class="col-sm-4"><label for="form[hour]">A quel heure ?</label></div>
+                                <div class="col-sm-4"><label for="form[hour]">A quelle heure ?</label></div>
                                 <div class="col-sm-3">{{ form_widget(form.hour.time)}}</div>
                                 <div class="col-sm-2"></div>
                             </div>
@@ -70,24 +70,25 @@
                             </div>
                         </div>      
                 </div>
-               {{ form_end(form) }}</div>
+           
+               {{ form_end(form) }}</div> 
                 <div class="row">
                     <div class="col-sm-12 col-lg-6">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 text-center">
                                 <h2>Reservez votre taxi avec AM taxi</h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-2 col-lg-4"></div>
-                            <div class="col-sm-1"><i class="icon-calendar icon-4x" style="color:#fed430"></i></div>
-                            <div class="col-sm-7 text-justify"><p style ="font-size:1.5em">Commande immédiate ou réservation en moins de 5 minutes</p></div>
+                            <div class="col-sm-12 col-lg-1 text-center"><i class="icon-calendar icon-4x" style="color:#fed430"></i></div>
+                            <div class="col-sm-12 col-lg-7 text-center"><p style ="font-size:1.5em">Commande immédiate ou réservation en </br> moins de 5 minutes</p></div>
                         </div>
                     
                         <div class="row">
                             <div class="col-sm-2 col-lg-4"></div>
-                            <div class="col-sm-1"><i class="icon-mobile-phone icon-4x" style="color:#fed430"></i></div>
-                            <div class="col-sm-7 text-justify"><p style ="font-size:1.5em">Paiement sécurisé en ligne par carte bleue</p></div>
+                            <div class="col-sm-12 col-lg-1 text-center"><i class="icon-mobile-phone icon-4x" style="color:#fed430"></i></div>
+                            <div class="col-sm-12 col-lg-7 text-center"><p style ="font-size:1.5em">Paiement sécurisé en ligne par carte bleue</p></div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-lg-1"></div>
@@ -98,18 +99,44 @@
                                 <h2>Avis Clients :</h2>
                             </div>
                         </div>
-                        <ul> 
+                         <div id="demo" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
                             {% for commentaire in commentaires %}
-                                <div class="inline"> 
-                                <div class="row"> <div class="col-sm-12">{{ commentaire.username }} </div></div>
-                                <div class="row"> <div class="col-sm-12">{{ commentaire.commentaire}} </div></div>
+                            {% if commentaire == commentaires[0] %}
+                            <div class="carousel-item active">
+                                <div class="row"> 
+                                   <div class="col-sm-1"> {# <input type="hidden" name="test">{{ commentaire.note }}</input>#}</div> 
+                                    <div class="col-sm-3 text-left">{{ commentaire.username }}</div>
+                                    <div class="col-sm-2"></div>
+                                   <!-- <div class="col-sm-5">
+                                        <button class="star etoile1" value="1"><i class="icon-star"></i></button>
+                                        <button class="star etoile2" value="2"><i class="icon-star"></i></button>
+                                        <button class="star etoile3" value="3"><i class="icon-star"></i></button>
+                                        <button class="star etoile4" value="4"><i class="icon-star"></i></button>
+                                        <button class="star etoile5" value="5"><i class="icon-star"></i></button>
+                                    </div>-->
                                 </div>
-                            {% endfor %}   
-                        </ul> 
+                                <div class="row"> <div class="col-sm-4"></div><div class="col-sm-8 text-left">{{ commentaire.commentaire}} </div></div>
+                            </div>
+                            {% else %}
+                            <div class="carousel-item">
+                                <div class="row">
+                                     <div class="col-sm-1">{#<input type="hidden" name="test">{{ commentaire.note }}</input>#}</div> 
+                                    <div class="col-sm-3 text-left">{{ commentaire.username }}</div>
+                                    <div class="col-sm-2"></div>
+                                  <!--  <div class="col-sm-5">
+                                        <button class="star etoile1" value="1"><i class="icon-star"></i></button>
+                                        <button class="star etoile2" value="2"><i class="icon-star"></i></button>
+                                        <button class="star etoile3" value="3"><i class="icon-star"></i></button>
+                                        <button class="star etoile4" value="4"><i class="icon-star"></i></button>
+                                        <button class="star etoile5" value="5"><i class="icon-star"></i></button>
+                                    </div> -->                         
+                                </div>
+                                <div class="row"> <div class="col-sm-4"></div><div class="col-sm-8 text-left">{{ commentaire.commentaire}} </div></div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                     <div class="col-sm-1"> </div>
-                </div>
-
+            </div>
 {% endblock %}
-
-

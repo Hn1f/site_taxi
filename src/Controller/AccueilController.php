@@ -94,7 +94,7 @@ class AccueilController extends AbstractController
         }
        
 
-    return $this->render('accueil/paiement.html.twig', [
+    return $this->render('accueil/paiement2.html.twig', [
         'trajet'=>$trajet,
         'prix' => $prix,
         'form' =>$form->createView(),
@@ -121,7 +121,7 @@ class AccueilController extends AbstractController
             $commentaire->setUsername($username); 
             $entityManager->persist($commentaire);
             $entityManager->flush();
-            return $this->render('accueil/accueil.html.twig'); 
+            return $this->redirect($this->generateUrl('accueil')); 
         }
 
         return $this->render('accueil/commentaire.html.twig', [
@@ -184,12 +184,12 @@ class AccueilController extends AbstractController
                 $originalImageName = pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
                 $safeImageName = $slugger->slug($originalImageName); 
                 $newImageName = $safeImageName.'-'.uniqid().'.'.$image->guessExtension();
-                
+                dump($newImageName);                 
                 try{
                     $image->move(
                         $this->getParameter('image_directory'), 
                         $newImageName
-                    ); 
+                    );
                 } catch(FileException $e){
 
                 }
@@ -198,7 +198,7 @@ class AccueilController extends AbstractController
             
             $entityManager->persist($article);
             $entityManager->flush();
-            return $this->redirect($this->generateUrl('blog')); 
+            // return $this->redirect($this->generateUrl('blog')); 
         }
 
         return $this->render('accueil/article.html.twig', [
@@ -213,8 +213,6 @@ class AccueilController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Article::class);
         $articles = $repo->findAll();
-        $article=$articles[1];
-        dump($article->getImage_name()); 
         return $this-> render('accueil/blog.html.twig', [
             'articles' => $articles, 
         ]); 
@@ -233,5 +231,53 @@ class AccueilController extends AbstractController
             'articleshow'=> $article,
             'corps' => $corps,  
         ]); 
+    }
+
+    /**
+     * @Route("/charge", name="charge")
+    */
+    public function charge(SessionInterface $session, Request $request){
+        
+        $trajet= $session->get('trajet');  
+        $prix = $trajet->getPrix();
+        $prix=$prix*100;
+        dump($trajet);
+        dump($request); 
+        $departP=$trajet->getDepart(); 
+        $arriveP=$trajet->getArrive(); 
+            // Set your secret key. Remember to switch to your live secret key in production!
+            // See your keys here: https://dashboard.stripe.com/account/apikeys
+            \Stripe\Stripe::setApiKey('sk_test_TtaPjqYDNtuxKN1Frok5yjEa00kQNBfs1j');
+    
+            // Token is created using Stripe Checkout or Elements!
+            // Get the payment token ID submitted by the form:
+            $token = $request->request->get('stripeToken');
+            $charge = \Stripe\Charge::create([
+            'amount' =>$prix,
+            'currency' => 'eur',
+            'description' => 'Example charge',
+            'source' => $token,
+            ]); 
+            return $this->render('accueil/paiement2.html.twig'); 
+
+    }
+
+    /**
+     * @Route("/confirmationTaxi", name="confirmationT")
+    */
+    public function confirmationT(SessionInterface $session, Request $request){
+        
+        dump($request); 
+        return $this->redirectToRoute('accueil'); 
+
+    }
+
+     /**
+     * @Route("/mentions-legales", name="mentions")
+    */
+    public function mentions(){
+
+        return $this->render('accueil/mention.html.twig'); 
+
     }
 }

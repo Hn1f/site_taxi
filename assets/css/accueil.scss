@@ -2,18 +2,35 @@
        $jaune:rgba(254, 212, 48, 0.5);
        $jauneTaxi: #fed430; 
        $gris: #d4cece; 
+    
+    * {
+        margin:0; 
+        padding:0;
+        font-size:1em;  
+    }
 
-body{
+   body, html{height:100%;}
+
+    body{
     padding: 0;
-}
-
+    }
 a {
     text-decoration: none;
 }
 
+#marge{
+    background-color: #0f434e;  
+}
 .navbar{
-    background-color: #0f434e;
     opacity: 100%;
+}
+
+.col>input{
+    width:100%;
+}
+
+#navbarColor01>ul{
+    text-align:right; 
 }
 
 #logo{
@@ -23,6 +40,10 @@ a {
 
 .container-fluid{
     padding: 0;
+    max-width:1280px;
+    min-height:100%;
+    margin:0 auto;
+    position:relative;
 }
 
 .Accueil{
@@ -35,22 +56,33 @@ a {
 #resa{
     position: relative;
     z-index: 1;
-    background-position: absolute; 
-    padding: 5%; 
-    background: url("../../public/img/cholet2.png") no-repeat scroll top/ 100% auto;
-    margin-bottom: 2%;
+    // background-position: absolute; 
+    padding: 10%; 
+    background: url("../../public/img/cholet2.png") no-repeat scroll top/ 120% auto;
+    margin-bottom: 2%; 
+
+}
+
+ .under{
+    text-decoration:underline; 
+    margin-bottom:4%; 
 }
 
 
 [class*="col-"], footer {
-    /*background-color:lightgreen;
+   /* background-color:lightgreen;
     border: 2px solid black;*/
     border-radius: 6px;
     line-height: 40px;
-    text-align: center;
-    padding: 0;
 }
 
+#trajet_cp1{
+    width:100%;
+}
+
+.imgArcticle{
+    box-shadow:10px 5px 5px grey ; 
+}
 
 #cp,#cp2{
     border-bottom-right-radius : 0;
@@ -64,7 +96,7 @@ a {
 
 #form1,#form2{
     color: white;
-    padding: 2%;
+    padding: 0;
 }
 
 .inscription1{
@@ -119,7 +151,12 @@ a {
     background-color: #0f434e;
     border-radius: 0%;
     margin-top: 2%;
+    bottom:0;
+    width:100%;
+    padding-top:50px;
 }
+
+
 
 .article>img{
     width: 200px;
@@ -140,3 +177,20 @@ a {
     height: 100%;
     margin-top: 2%;
 }
+
+@media only screen and (min-width : 1224px){
+    /* Styles pour cette Media Queries */
+    .trait{
+        border-top:solid black 1px;
+        border-bottom:solid black 1px;
+        border-radius:0;
+    }
+}
+    @media only screen and (min-device-width : 320px) and (max-device-width : 1220px) {
+        /* Styles pour cette Media Queries */
+        .trait{
+            border-left:solid black 1px;
+            border-right:solid black 1px;
+            border-radius:0;
+        }
+    }

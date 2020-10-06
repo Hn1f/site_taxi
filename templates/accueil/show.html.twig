@@ -14,23 +14,23 @@
                         <h2>Articles récents</h2>
                     </div>
                 </div>
-                {% for article in articles %}
-                    <div class="row">
-                        <div class="col-lg-12">
+                <div class="row ">
+                    {% for article in articles %}                    
+                        <div class=" col-sm-2 col-lg-12 trait">
                           <a href="{{ path('blog_show', {'id': article.id }) }}">{{ article.title }}</a>
-                        </div>
-                    </div>
-                {% endfor %}
+                        </div> 
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-lg-6 articlecard">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="jaune">{{ articleshow.title }}</h3>
+                        <h3 class="jaune under">{{ articleshow.title }}</h3>
                     </div>
             </div>
             <div class="row ">
                 <div class="col-lg-12">
-                    <img src="{{ asset('uploads/images/' ~ articleshow.image_name) }}" alt="illustration">
+                    <img class ="imgArcticle" src="{{ asset('uploads/images/' ~ articleshow.image_name) }}" alt="illustration">
                 </div>
             </div>
             <div class="row">

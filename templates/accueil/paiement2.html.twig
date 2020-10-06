@@ -1,0 +1,286 @@
+
+{% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+{% block body %} 
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlAsntkQzHrbKeT0GQkaLSSdWIjIqQeqk&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style>
+   html, body{
+      padding:0; 
+      margin:0; 
+    }
+    #map {
+        height: 50%;
+        margin-top:1%; 
+        width:80%;
+        margin-left:10%; 
+        z-index: 0;
+      }
+       #logo{
+      height:10%;
+      width:auto;
+      margin-left:2%;   
+    }
+
+
+    #card-element{
+      margin-top:10%; 
+    }
+
+    .btn{display:inline-block;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;margin-top:10%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media screen and (prefers-reduced-motion:reduce){.btn{transition:none}}.btn:focus,.btn:hover{text-decoration:none}
+
+    .container-fluid{ 
+      background-color: #DCDCDC; 
+      font-size:20px; 
+      color:white;
+    }
+     .footer{
+    background-color: #0f434e;
+    border-radius: 0%;
+    margin-top: 2%;
+    padding:0; 
+}
+    
+    .row1{
+      display:flex; 
+      padding:2%;   
+    }
+    .row1>col{
+      width: 10%;    
+    }
+    .element2>form>label{
+      width:50%; 
+      margin-top:10%; 
+      margin-left:42%; 
+      color:#fed430; 
+      text-decoration:underline; 
+
+    }
+     button{
+        background-color:#fed430;
+      
+    }
+
+     #espece{
+       width:30%
+     }
+
+
+     @media only screen and (min-device-width : 320px) and (max-device-width : 1220px) {
+/* Styles pour cette Media Queries */
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+     .container-fluid{
+      width:100%; 
+      margin-left:0;
+      padding: 2%;    
+      height:190%; 
+    }
+    #cheque{
+    width:25%;
+    margin-right:0; 
+    }
+
+    button{
+      margin-left: 30%; 
+    }
+
+    #cb{
+      width:15%; 
+      margin-left:0%; 
+    }
+    .element1{ 
+      margin-top:2%; 
+     text-justify: inter-word; 
+    }
+         .element2{
+      width:90%; 
+      margin-left:5%; 
+      border-radius:3%; 
+      background-color:white; 
+      padding:2px;
+    }
+
+    #mention{
+       font-size:10px; 
+     }
+
+}
+    @media only screen and (min-width : 1224px){
+/* Styles pour cette Media Queries */
+    #map {
+        height: 50%;
+        margin-top:1%; 
+        width:80%;
+        margin-left:10%; 
+        z-index: 0;
+      }
+    .container-fluid{
+      width:60%; 
+      margin-left:20%;
+      padding: 2%;  
+      margin-top:1%; 
+      border-radius:3%;
+    }
+
+    #cheque{
+    width:15%;
+    margin-right:5%; 
+    }
+    #cb{
+      width:15%; 
+    }
+
+    .element1{
+      width:50%; 
+      margin-top:6%; 
+      text-justify: inter-word;
+    }
+
+    button{
+      margin-left: 40%; 
+    }
+    #conteneur{
+    display: flex;
+    }
+
+         .element2{
+      width:50%;
+      margin-top:6%;
+      border-radius:3%; 
+      background-color:white; 
+      padding:3px;  
+    }
+}
+    </style>
+     <div id="depart1" data-a="{{ depart }}"></div>
+     <div id="arrive1" data-b="{{ arrive }}"></div>
+    <script>
+        var depart = document.querySelector('#depart1'); 
+        var arrive = document.getElementById('arrive1');
+        console.log(depart.dataset.a); 
+        console.log(arrive.dataset.b);  
+    </script>
+    {% set departA = depart|split(',') %}
+    {% set arriveA = arrive|split(',') %}
+    <script>
+      (function(exports) {
+        "use strict";
+
+        function initMap() {
+          exports.map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+              lat:{{ (departA[0] + arriveA[0])/2 }},
+              lng:{{ (departA[1] + arriveA[1])/2 }}, 
+            },
+            zoom: 9
+          });
+
+           var marker = new google.maps.Marker({
+            position:{
+              lat: {{departA[0]}},
+              lng:{{departA[1]}}, 
+            },
+            map: map,
+            title: 'depart'
+  });
+            var marker = new google.maps.Marker({
+            position:{
+              lat:{{arriveA[0]}},
+              lng: {{arriveA[1]}}, 
+            },
+            map: map,
+            title: 'arrive'
+  });
+
+        }
+
+        exports.initMap = initMap;
+      })((this.window = this.window || {}));
+    </script>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"  id="marge">
+  <a class="navbar-brand" href="{{ path('accueil') }}"><img src='../img/logo.png' alt='logo' id='logo'/></a>
+</nav>
+  <div class="container-fluid"> 
+    <div  id="map"></div> 
+    <div id="conteneur">
+      <div class="element1">
+          <p>
+            Félicitation, vous vous appretez à reservez un trajet du  {{ trajet.adresse1 }} {{ trajet.cp1 }}  pour aller au {{ trajet.adresse2}} {{ trajet.cp2 }} le {{ trajet.hour.date | date('d/m/Y') }} à {{ trajet.hour.date | date('H:i') }}. <br/>
+            Le prix de la course est éstimée entre {{ prix - (prix * 20 / 100) }}€ et {{ prix + (prix * 20 / 100) }}€ dont {{prix}} à payer maintenant nous serons ravis de vous amener à destination.
+          </p>
+      </div>
+      <div class="element2">   
+        <div class="routeConnexion" data-route-controller="{{path('app_login')}}"></div>
+          <form action="{{ path('charge') }}" method="post" id="payment-form">
+                <label for="card-element">
+                  Paiement
+                </label>
+                <div id="card-element">
+                  <!-- A Stripe Element will be inserted here. -->
+                </div>
+
+                <!-- Used to display Element errors. -->
+                <div id="card-errors" role="alert"></div>
+            <button style='color:white' class="btn">Payer {{ prix }}€</button>
+            </div>
+          </form>  
+        </div>
+    </div>
+  </div>
+  <footer class="footer" >
+        <div class="container">
+          <div class="row1">
+            <div class="col">
+              <img src="../img/LogoCb.png" id='cb' alt="logo carte bleue">
+            </div>
+             <div class="col">
+              <img src="../img/espece.png" id="espece" alt="logo espece">
+             </div>
+
+             <div class="col">
+              <img src="../img/cheque.png" id="cheque" alt="logo cheque">
+             </div>
+             <div class="col">
+              <a style="color:white" id ="mention" href="#">mentions légales</a>
+             </div>
+          </div>
+        </div>
+      </footer>
+      
+
+        <script>
+            var stripe = Stripe('pk_test_8Ei88CKOVZp7qCRqZ7wCayDE00wv13nimm');
+            var elements = stripe.elements();
+            var style = {
+            base: {
+              // Add your base input styles here. For example:
+              fontSize: '16px',
+              color: '#32325d',
+
+            },
+            
+          };
+
+          // Create an instance of the card Element.
+          var card = elements.create('card', {style: style});
+
+          // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+    </script>
+  </body>
+{% endblock %}
+
+ {% block javascripts %}
+          {{ encore_entry_script_tags('app') }}
+        {% endblock %}

@@ -183,46 +183,46 @@ import '../css/connexion.scss';
      function colorStar(n){
        switch(n){
          case 0: 
-         $('#etoile1').css('color','black');
-         $('#etoile2').css('color','black');
-         $('#etoile3').css('color','black');
-         $('#etoile4').css('color','black');
-         $('#etoile5').css('color','black');
+         $('.etoile1').css('color','black');
+         $('.etoile2').css('color','black');
+         $('.etoile3').css('color','black');
+         $('.etoile4').css('color','black');
+         $('.etoile5').css('color','black');
           break; 
          case 1: 
-          $('#etoile1').css('color','#fed430');
-          $('#etoile2').css('color','black');
-          $('#etoile3').css('color','black');
-          $('#etoile4').css('color','black');
-          $('#etoile5').css('color','black');
+          $('.etoile1').css('color','#fed430');
+          $('.etoile2').css('color','black');
+          $('.etoile3').css('color','black');
+          $('etoile4').css('color','black');
+          $('etoile5').css('color','black');
           break;
          case 2: 
-          $('#etoile1').css('color','#fed430');
-          $('#etoile2').css('color','#fed430');
-          $('#etoile3').css('color','black');
-          $('#etoile4').css('color','black');
-          $('#etoile5').css('color','black');
+          $('.etoile1').css('color','#fed430');
+          $('.etoile2').css('color','#fed430');
+          $('.etoile3').css('color','black');
+          $('.etoile4').css('color','black');
+          $('.etoile5').css('color','black');
           break;
          case 3: 
-          $('#etoile1').css('color','#fed430');
-          $('#etoile2').css('color','#fed430');
-          $('#etoile3').css('color','#fed430');
-          $('#etoile4').css('color','black');
-          $('#etoile5').css('color','black');
+          $('.etoile1').css('color','#fed430');
+          $('.etoile2').css('color','#fed430');
+          $('.etoile3').css('color','#fed430');
+          $('.etoile4').css('color','black');
+          $('.etoile5').css('color','black');
           break;
          case 4: 
-          $('#etoile1').css('color','#fed430');
-          $('#etoile2').css('color','#fed430');
-          $('#etoile3').css('color','#fed430');
-          $('#etoile4').css('color','#fed430');
-          $('#etoile5').css('color','black');
+          $('.etoile1').css('color','#fed430');
+          $('.etoile2').css('color','#fed430');
+          $('.etoile3').css('color','#fed430');
+          $('.etoile4').css('color','#fed430');
+          $('.etoile5').css('color','black');
           break;
          case 5: 
-          $('#etoile1').css('color','#fed430');
-          $('#etoile2').css('color','#fed430');
-          $('#etoile3').css('color','#fed430');
-          $('#etoile4').css('color','#fed430');
-          $('#etoile5').css('color','#fed430');
+          $('.etoile1').css('color','#fed430');
+          $('.etoile2').css('color','#fed430');
+          $('.etoile3').css('color','#fed430');
+          $('.etoile4').css('color','#fed430');
+          $('.etoile5').css('color','#fed430');
           break;
          default: 
           break; 

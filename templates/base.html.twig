@@ -13,7 +13,7 @@
     </head>
     <body>
       <nav class="navbar navbar-expand-lg navbar-dark" id="marge">
-        <a class="navbar-brand" href="#"><img src='img/logo.png' alt='logo' id='logo'></a>
+        <a class="navbar-brand" href="#"><img src='../../img/logo.png' alt='logo' id='logo'></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
         data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true"
         aria-label="Toggle navigation">
@@ -53,21 +53,22 @@
         {% block body %}
         {% endblock %}
       </div>
+      </div>
       <footer class="footer">
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <img src="img/LogoCb.png" style="width:50%" alt="logo carte bleue">
+              <img src="../../img/LogoCb.png" style="width:50%" alt="logo carte bleue">
             </div>
              <div class="col">
-              <img src="img/espece.png" style="width:25%" alt="logo espece">
+              <img src="../../img/espece.png" style="width:25%" alt="logo espece">
              </div>
 
              <div class="col">
-              <img src="img/cheque.png" style="width:15%" alt="logo cheque">
+              <img src="../../img/cheque.png" style="width:15%" alt="logo cheque">
              </div>
              <div class="col">
-              <a style="color:white" href="">mentions légales</a>
+              <a style="color:white" href="{{ path('mentions') }}">mentions légales</a>
              </div>
           </div>
         </div>

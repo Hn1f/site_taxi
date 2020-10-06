@@ -124,23 +124,24 @@ class SecurityController extends AbstractController
             $arrive1= $trajet->getAdresse2()." ". $trajet->getCp2(); 
             $id=$user->getId(); 
             $prenom=$user->getFirstname();
-            $nom=$user->getLastName();  
+            $nom=$user->getLastName(); 
+            $numero=$user->getPhone();  
             $trajet->setUserId($id);
             $entityManager->persist($trajet);
             $entityManager->flush();
             $smspartner = new SMSPartnerAPI (false);
-            //check credits
+            // check credits
             $result = $smspartner->checkCredits('?apiKey=6c30a24b177c04b53e4160a0ddde0ce091f9d66a');
             //send SMS
-            $fields = array(
-                "apiKey"=>"6c30a24b177c04b53e4160a0ddde0ce091f9d66a",
-                "phoneNumbers"=>"0769849455",
-                "message"=>"Un trajet de ".$depart1." à ".$arrive1." vien d'être réservé pour un total de ".$prix."€ par monsieur ".$nom." ".$prenom.".",
+             $fields = array(
+                   "apiKey"=>"6c30a24b177c04b53e4160a0ddde0ce091f9d66a",
+                "phoneNumbers"=>"0787109714",
+                "message"=>"Un trajet de ".$depart1." à ".$arrive1." vien d'être réservé pour un total de ".$prix."€ par monsieur ".$nom." ".$prenom." vous pouvez le contacter au ". $numero.". Voulez vous accepter la réservation ? (répondre par oui ou non)" ,
                 "sender" => "AMTaxi",
             );
-            // $result = $smspartner->sendSms($fields);
+            $result = $smspartner->sendSms($fields);
             //get delivery
-            // $result = $smspartner->checkStatusByNumber('?apiKey=6c30a24b177c04b53e4160a0ddde0ce091f9d66a&messageId=666&phoneNumber=0769849455');
+            $result = $smspartner->checkStatusByNumber('?apiKey=6c30a24b177c04b53e4160a0ddde0ce091f9d66a&messageId=666&phoneNumber=0787109714');
             return $this->redirectToRoute('paiement');
         }
 
@@ -154,14 +155,16 @@ class SecurityController extends AbstractController
          'form' => $form->createView(),
          ]);
         }
-        else{
-            return $this->render('security/login.html.twig', [
-                'last_username' => $lastUsername,
-                 'error' => $error,
-                 'form' => $form->createView(),
-         ]);
+        else if(isset($user) && !isset($trajet)){
+            // return $this->redirectToRoute('accueil');
 
         }
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+             'error' => $error, 
+             'form' => $form->createView(),
+             ]);
     }
 
     /**
